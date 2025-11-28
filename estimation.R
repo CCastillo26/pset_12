@@ -4,7 +4,13 @@
 #' @return data frame with four columns
 bike_df <- read.csv("/Users/charlycastillo/Downloads/sample_bike.csv")
 
+# Script from EdStem
 estimate_arrival_rates <- function(bike_df) {
+  bike_df <- bike_df %>%
+    mutate(
+      start_time = as.POSIXct(start_time, format = "%Y-%m-%d %H:%M:%S"),
+      end_time = as.POSIXct(end_time, format = "%Y-%m-%d %H:%M:%S")
+    )
   
   # Compute average number of trips per hour between pairs
   x_hat <- bike_df %>%
