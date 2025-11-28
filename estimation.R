@@ -1,3 +1,5 @@
+library(tidyverse)
+
 #` Estimate arrival rates
 #' @description Estimates arrival rates using NHPP
 #' @param bike_df data frame
