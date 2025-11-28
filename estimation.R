@@ -64,7 +64,7 @@ estimate_arrival_rates <- function(bike_df) {
     left_join(alpha_hat, by = c("start_station" = "station", "hour")) %>%
     mutate(mu_hat = ifelse(avg_avail > 0, avg_trips / avg_avail, NA))
   
-  return(mu_hat)
+  return(mu_hat) # Corresponds with lambda
 }
 
 # Estimate arrival rates
