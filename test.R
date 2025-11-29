@@ -14,7 +14,6 @@ expect_true(all(arrivals$time >= 0 & arrivals$time <= 24))
 expect_true(all(arrivals$start_station == "5"))
 
 
-
 # TEST 2: simulate_days()
 toy_trips <- data.frame(start_station = c("5", "5"), time = c(1, 2))
 
@@ -27,7 +26,6 @@ days_inventory <- days$final_inventory
 
 expect_true(sum(days_inventory) <= sum(toy_bikes))
 expect_equal(length(days_log$success), nrow(toy_trips))
-
 
 
 # TEST 3: calculate_metrics()
@@ -44,7 +42,6 @@ expect_equal(metrics$unused_bikes[metrics$station == "5"], 1)
 
 expect_equal(metrics$failed_trips[metrics$station == "10"], 1)
 expect_equal(metrics$unused_bikes[metrics$station == "10"], 0)
-
 
 
 # TEST 4: optimize_placement()
