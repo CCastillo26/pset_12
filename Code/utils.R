@@ -16,11 +16,6 @@ fleet_sizes <- c(100, 200, 500) # Example fleet sizes for table
 final_placement <- data.frame(fleet_size = numeric(0), station = character(0), 
                               recommended_bikes = numeric(0))
 
-#` Calculate simulation metrics
-#' @description Calculates simulation metrics for failed trips, unused bikes
-#' @param trip_log data frame
-#' @param final_inventory numeric vector
-#' @return data frame with three columns
 for (total_bikes in fleet_sizes) {
   base_bikes <- floor(total_bikes / num_stations) # From placement.R
   recommended_bikes <- rep(base_bikes, num_stations) # From placement.R
