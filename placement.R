@@ -33,8 +33,40 @@ calculate_metrics <- function(trip_log, final_inventory) {
 
 
 #` Optimize bike placement
-#' @description Optimizes bike placement
-#' @param trip_log data frame
-#' @param final_inventory numeric vector
-#' @return data frame with three columns
+#' @description Optimizes bike placement based on successes, failures
+#' @param metrics data frame
+#' @param total_bikes numeric
+#' @return data frame with two columns
 
+optimize_placement <- function(metrics, total_bikes) {
+  stations <- metrics$station
+  num_stations <- length(stations)
+  
+  base_bikes <- floor(total_bikes / num_stations)
+  recommended_bikes <- rep(base_bikes, num_stations)
+  
+  remaining_bikes <- total_bikes - sum(recommended_bikes)
+  
+  need_score <- metrics$failed_trips - metrics$unused_bikes
+  
+  if (remaining_bikes > 0) {
+    station_order <- order(need_score, decreasing = TRUE)
+    position <- 1
+    
+    while (remaining_bikes > 0) {
+      station_index <- station_order[position]
+      recommended_bikes[station_index] <- recommended_bikes[station_index] + 1
+      remaining_bikes <- remaining_bikes - 1
+      
+      position <- position + 1
+      if (position > length(station_order)) {
+        position <- 1
+      }
+    }
+  }
+  
+  placement <- data.frame(station = stations, 
+                          recommended_bikes = recommended_bikes)
+  
+  return(placement)
+}
