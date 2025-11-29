@@ -1,8 +1,8 @@
 library(tidyverse)
 source("estimation.R")
 
-#` Simulate arrival rates
-#' @description Simulates arrival rates using lambda_max and thinning
+#` Simulate arrival times
+#' @description Simulates arrival times using lambda_max and thinning
 #' @param arrival_rates data frame
 #' @param day numeric
 #' @return data frame with two columns for start_station and time
@@ -64,7 +64,7 @@ simulate_arrival_times <- function(arrival_rates, day = 24) {
 #' @description Simulates bike use over a day
 #' @param arrivals data frame
 #' @param initial_bikes numeric vector
-#' @return list with two columns for trip_log and final_inventory
+#' @return list with two elements
 
 simulate_days <- function(arrivals, initial_bikes) {
   arrivals <- arrivals[order(arrivals$time), ]
